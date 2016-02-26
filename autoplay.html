@@ -1,0 +1,173 @@
+<!DOCTYPE html >
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<script type="text/javascript" src="jquery-1.12.0.min.js"></script>
+<title>轮播器</title>
+<style>
+body{
+font-family: "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei UI","Microsoft YaHei",SimHei,"宋体",simsun,sans-serif;
+}
+#disp{
+margin:0 auto;
+border:1px solid #eee;
+width:90%;
+min-width:400px;
+height:200px;
+position:relative;
+
+overflow:hidden;
+}
+#banner_bg {
+position:absolute; 
+bottom:0;
+
+background-color:#000;
+height:25px;
+opacity:0.3;
+z-index:1000;
+cursor:pointer;
+
+ }
+#info{
+position:absolute;
+z-index:1001;
+bottom:0;
+color:#fff;
+ width:300px;
+ height:30px；
+ background:red;
+ }
+#pic{
+position:absolute;
+margin:0;
+padding:0;
+border:0;
+list-style-type:none;
+}
+.num{
+list-style-type:none;
+position:absolute;
+cursor:pointer;
+right:5px;
+bottom:-10px;
+line-height:22px;
+font-size:14px;
+text-align:center;
+z-index:1001;
+height:20px;
+opacity:0.7;
+
+}
+.num li{ 
+width:20px;
+border-radius:10px;
+float:left;
+background-color:#6f4f67;
+border:1px solid #e5eaff;
+}
+.dt{
+width:300px;
+height:200px;
+border:1px solid red;
+}
+.numd{
+margin:0;
+padding:0;
+list-style: outside none none;
+text-decoration:none;
+
+text-align:center;
+letter-spacing:2px;
+
+}
+.numd li{
+display:inline-block;
+height:40px;
+line-height:40px;
+width:120px;
+margin:0 10px;
+background-color:#eee;
+border-bottom:1px solid #fff;
+}
+.numd a{
+display:block;
+text-decoration:none;
+}
+
+.numd li:nth-child(2n){
+background-color:#fafafa;
+}
+.numd a:hover{
+background-color:#ccc;
+}
+</style>
+<script>
+
+$(function(){
+var t=n=0;
+var count=$("#pic li").length;
+$("#pic li:not(:first-child)").hide();
+$(".num li").click(function(){
+	var i=$(this).html()-1;
+	n=i;
+		$("#info").html($("#pic li img").eq(i).attr("alt"))
+		$(this).css({"background":"#be2424",'color':'#000'}).siblings().css({"background":"#6f4f67",'color':'#fff'}); 
+		$("#pic li").fadeOut(500).parent().children().eq(i).fadeIn(800);
+})
+t=setInterval("showauto()",1000);
+$("#pic li").hover(function(){
+clearInterval(t)
+},function(){
+t=setInterval("showauto()",1000)
+})
+
+
+})
+function showauto(){
+var count=$("#pic li").length;
+if (n>=count-1){
+	n=0
+}else{
+	n++
+}
+$(".num li").eq(n).click()
+
+}
+</script>
+
+</head>
+<body>
+
+<div id="disp">
+<div id="banner_bg"></div>
+<div id="info"></div>
+		<ul id="pic">
+			<li><img src="images/s1.jpg" alt="图片1"></li>
+			<li><img src="images/s2.jpg" alt="图片2"></li>
+			<li><img src="images/s3.jpg" alt="图片3"></li>
+			<li><img src="images/s4.jpg" alt="图片4"></li>
+		</ul>
+		<ul class="num">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+</div>
+<div class="dt">
+		<ul class="numd">
+
+			<li><a href="###">图片1</a></li>
+			<li><a href="###">图片2</a></li>
+			<li><a href="###">图片3</a></li>
+			<li><a href="###">图片4</a></li>
+			<li><a href="###">图片5</a></li>
+			<li><a href="###">图片6</a></li>
+			<li><a href="###">图片7</a></li>
+			<li><a href="###">图片8</a></li>
+		</ul>
+</div>
+</body>
+</html>
